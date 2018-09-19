@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ReaderViewController : UIViewController
 
-@property(copy,nonatomic)NSString *text;
-
-@property(strong,nonatomic)UILabel *labelStr;
+@property(copy,nonatomic)NSMutableAttributedString *strData;
 
 @end
 

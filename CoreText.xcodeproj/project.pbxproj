@@ -16,6 +16,13 @@
 		B40775B62151641E00D09690 /* CoreTextTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B40775B52151641E00D09690 /* CoreTextTests.m */; };
 		B40775C12151641E00D09690 /* CoreTextUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B40775C02151641E00D09690 /* CoreTextUITests.m */; };
 		B40775D021517AE600D09690 /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40775CF21517AE600D09690 /* ReaderViewController.m */; };
+		B494D5172152B6D800B11FC4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B494D5162152B6D800B11FC4 /* CoreText.framework */; };
+		B494D51D2152B74A00B11FC4 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = B494D51C2152B74A00B11FC4 /* UIView+frameAdjust.m */; };
+		B494D5202152B7BA00B11FC4 /* CTFrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B494D51F2152B7BA00B11FC4 /* CTFrameParserConfig.m */; };
+		B494D5232152B7E700B11FC4 /* CTFrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B494D5222152B7E700B11FC4 /* CTFrameParser.m */; };
+		B494D5262152B81100B11FC4 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = B494D5252152B81100B11FC4 /* CoreTextData.m */; };
+		B494D5292152B83400B11FC4 /* CTDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B494D5282152B83400B11FC4 /* CTDisplayView.m */; };
+		B494D52B2152BA7E00B11FC4 /* Chapter1.txt in Resources */ = {isa = PBXBuildFile; fileRef = B494D52A2152BA7E00B11FC4 /* Chapter1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +61,19 @@
 		B40775C22151641E00D09690 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B40775CE21517AE600D09690 /* ReaderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReaderViewController.h; sourceTree = "<group>"; };
 		B40775CF21517AE600D09690 /* ReaderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReaderViewController.m; sourceTree = "<group>"; };
+		B494D5142152B6A600B11FC4 /* CoreTextDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreTextDemo-Prefix.pch"; sourceTree = "<group>"; };
+		B494D5162152B6D800B11FC4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		B494D51B2152B74A00B11FC4 /* UIView+frameAdjust.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+frameAdjust.h"; sourceTree = "<group>"; };
+		B494D51C2152B74A00B11FC4 /* UIView+frameAdjust.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+frameAdjust.m"; sourceTree = "<group>"; };
+		B494D51E2152B7BA00B11FC4 /* CTFrameParserConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTFrameParserConfig.h; sourceTree = "<group>"; };
+		B494D51F2152B7BA00B11FC4 /* CTFrameParserConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTFrameParserConfig.m; sourceTree = "<group>"; };
+		B494D5212152B7E700B11FC4 /* CTFrameParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTFrameParser.h; sourceTree = "<group>"; };
+		B494D5222152B7E700B11FC4 /* CTFrameParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTFrameParser.m; sourceTree = "<group>"; };
+		B494D5242152B81100B11FC4 /* CoreTextData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
+		B494D5252152B81100B11FC4 /* CoreTextData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextData.m; sourceTree = "<group>"; };
+		B494D5272152B83400B11FC4 /* CTDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDisplayView.h; sourceTree = "<group>"; };
+		B494D5282152B83400B11FC4 /* CTDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDisplayView.m; sourceTree = "<group>"; };
+		B494D52A2152BA7E00B11FC4 /* Chapter1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chapter1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B494D5172152B6D800B11FC4 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +109,7 @@
 				B40775B42151641E00D09690 /* CoreTextTests */,
 				B40775BF2151641E00D09690 /* CoreTextUITests */,
 				B407759A2151641D00D09690 /* Products */,
+				B494D5152152B6D800B11FC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,15 +128,15 @@
 			children = (
 				B407759C2151641D00D09690 /* AppDelegate.h */,
 				B407759D2151641D00D09690 /* AppDelegate.m */,
-				B407759F2151641D00D09690 /* ViewController.h */,
-				B40775A02151641D00D09690 /* ViewController.m */,
-				B40775CE21517AE600D09690 /* ReaderViewController.h */,
-				B40775CF21517AE600D09690 /* ReaderViewController.m */,
+				B494D51A2152B72A00B11FC4 /* Controller */,
+				B494D5182152B72A00B11FC4 /* Model */,
+				B494D5192152B72A00B11FC4 /* View */,
 				B40775A22151641D00D09690 /* Main.storyboard */,
 				B40775A52151641E00D09690 /* Assets.xcassets */,
 				B40775A72151641E00D09690 /* LaunchScreen.storyboard */,
 				B40775AA2151641E00D09690 /* Info.plist */,
 				B40775AB2151641E00D09690 /* main.m */,
+				B494D5142152B6A600B11FC4 /* CoreTextDemo-Prefix.pch */,
 			);
 			path = CoreText;
 			sourceTree = "<group>";
@@ -135,6 +157,50 @@
 				B40775C22151641E00D09690 /* Info.plist */,
 			);
 			path = CoreTextUITests;
+			sourceTree = "<group>";
+		};
+		B494D5152152B6D800B11FC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B494D5162152B6D800B11FC4 /* CoreText.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B494D5182152B72A00B11FC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B494D52A2152BA7E00B11FC4 /* Chapter1.txt */,
+				B494D51E2152B7BA00B11FC4 /* CTFrameParserConfig.h */,
+				B494D51F2152B7BA00B11FC4 /* CTFrameParserConfig.m */,
+				B494D5212152B7E700B11FC4 /* CTFrameParser.h */,
+				B494D5222152B7E700B11FC4 /* CTFrameParser.m */,
+				B494D5242152B81100B11FC4 /* CoreTextData.h */,
+				B494D5252152B81100B11FC4 /* CoreTextData.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B494D5192152B72A00B11FC4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B494D51B2152B74A00B11FC4 /* UIView+frameAdjust.h */,
+				B494D51C2152B74A00B11FC4 /* UIView+frameAdjust.m */,
+				B494D5272152B83400B11FC4 /* CTDisplayView.h */,
+				B494D5282152B83400B11FC4 /* CTDisplayView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B494D51A2152B72A00B11FC4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B407759F2151641D00D09690 /* ViewController.h */,
+				B40775A02151641D00D09690 /* ViewController.m */,
+				B40775CE21517AE600D09690 /* ReaderViewController.h */,
+				B40775CF21517AE600D09690 /* ReaderViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +308,7 @@
 			files = (
 				B40775A92151641E00D09690 /* LaunchScreen.storyboard in Resources */,
 				B40775A62151641E00D09690 /* Assets.xcassets in Resources */,
+				B494D52B2152BA7E00B11FC4 /* Chapter1.txt in Resources */,
 				B40775A42151641D00D09690 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,9 +335,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B40775A12151641D00D09690 /* ViewController.m in Sources */,
+				B494D5292152B83400B11FC4 /* CTDisplayView.m in Sources */,
+				B494D5262152B81100B11FC4 /* CoreTextData.m in Sources */,
 				B40775AC2151641E00D09690 /* main.m in Sources */,
+				B494D51D2152B74A00B11FC4 /* UIView+frameAdjust.m in Sources */,
 				B407759E2151641D00D09690 /* AppDelegate.m in Sources */,
 				B40775D021517AE600D09690 /* ReaderViewController.m in Sources */,
+				B494D5232152B7E700B11FC4 /* CTFrameParser.m in Sources */,
+				B494D5202152B7BA00B11FC4 /* CTFrameParserConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +515,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33ZJ64DPUU;
+				GCC_PREFIX_HEADER = "CoreText/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,6 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33ZJ64DPUU;
+				GCC_PREFIX_HEADER = "CoreText/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

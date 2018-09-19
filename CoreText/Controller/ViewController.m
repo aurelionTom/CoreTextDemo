@@ -15,6 +15,8 @@
 
 @property(assign,nonatomic)int pagrIndex;
 
+@property(strong,nonatomic)NSArray *arrayData;
+
 @end
 
 @implementation ViewController
@@ -22,11 +24,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    NSString *chapter_num = [NSString stringWithFormat:@"Chapter1"];
+    NSString *path1 = [[NSBundle mainBundle] pathForResource:chapter_num ofType:@"txt"];
+    NSLog(@"%@",[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]);
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
+    self.arrayData = [self coreTextPaging:str textFrame:CGRectMake(0, 0, 300, 300)];
+    
     self.pagrIndex = 0;
     
     [self initPageView:NO];
     
 }
+
+//CoreText 分页
+- (NSArray *)coreTextPaging:(NSAttributedString *)str textFrame:(CGRect)textFrame{
+    NSMutableArray *pagingResult = [NSMutableArray array];
+    CFAttributedStringRef cfAttStr = (__bridge CFAttributedStringRef)str;
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(cfAttStr);
+    CGPathRef path = CGPathCreateWithRect(textFrame, NULL);
+    
+    int textPos = 0;
+    NSUInteger strLength = [str length];
+    while (textPos < strLength)  {
+        //设置路径
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), path, NULL);
+        //生成frame
+        CFRange frameRange = CTFrameGetVisibleStringRange(frame);
+        NSRange ra = NSMakeRange(frameRange.location, frameRange.length);
+        
+        //获取范围并转换为NSRange，然后以NSAttributedString形式保存
+        [pagingResult addObject:[str attributedSubstringFromRange:ra]];
+        
+        //移动当前文本位置
+        textPos += frameRange.length;
+        
+        CFRelease(frame);
+    }
+    CGPathRelease(path);
+    CFRelease(framesetter);
+    return pagingResult;
+}
+
 
 - (void)initPageView:(BOOL)isFromMenu;
 {
@@ -59,8 +99,8 @@
 - (ReaderViewController *)readerControllerWithPage:(NSUInteger)page
 {
     ReaderViewController *textController = [[ReaderViewController alloc] init];
+    textController.strData = self.arrayData[page];
     textController.view.backgroundColor = [UIColor whiteColor];
-    textController.labelStr.text = [NSString stringWithFormat:@"--asda:%ld--:Right from the start, you were a thief, 打从一开始，你就是个偷心贼,You stole my heart and,你偷走了我的心,I your willing victim,我是你的俘虏, I let you see the parts of me,我要让你看看我,That weren't all that pretty.,心底那不完美的部分. And with every touch.每次与你的接触.You fixed them..你都修补我这些残缺的部分.Now, you've been talking in your sleep.现在，你在睡梦中脱口 ​​而出的梦话.Oh oh, things you never say to ME.哦哦~这你些都没告诉我的事情.Oh oh, tell me that you've had enough.哦哦，告诉我你已经受够了.  Of our Love, our Love..我们之间的爱.Just give me a reason,. 就给我个一个理由",page];
     [textController view];
     return textController;
 }
@@ -71,6 +111,11 @@
 {
     NSLog(@"翻到了上一页");
 //    ReaderViewController *reader = (ReaderViewController *)viewController;
+    
+    if (self.pagrIndex == 0 || self.pagrIndex < 0 ) {
+        self.pagrIndex = 0;
+        return nil;
+    }
     self.pagrIndex--;
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
     return textController;
@@ -81,6 +126,10 @@
 {
     NSLog(@"翻到了下一页");
     self.pagrIndex ++;
+    if (self.pagrIndex > self.arrayData.count || self.pagrIndex == self.arrayData.count) {
+        self.pagrIndex = (int)self.arrayData.count -1;
+        return nil;
+    }
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
     return textController;
 }
