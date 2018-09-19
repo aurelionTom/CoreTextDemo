@@ -25,19 +25,19 @@
     [super viewDidLoad];
     
     CTFrameParserConfig *config = [[CTFrameParserConfig alloc] init];
-    config.textColor = [UIColor redColor];
+    config.textColor = [UIColor blackColor];
     config.width = self.ctView.width;
     NSString *str = [NSString stringWithFormat:@"%@",self.strData.string];
     CoreTextData *data = [CTFrameParser parseContent:str config:config];
     self.ctView.data = data;
     self.ctView.height = data.height;
-    self.ctView.backgroundColor = [UIColor yellowColor];
+    self.ctView.backgroundColor = [UIColor clearColor];
 }
 
 -(CTDisplayView *)ctView{
     if (!_ctView) {
         CTDisplayView *view = [[CTDisplayView alloc]init];
-        view.frame = CGRectMake(50, 164, 300, 300);
+        view.frame = CGRectMake(10, 64, self.view.frame.size.width-20, self.view.frame.size.height);
         [self.view addSubview:view];
         _ctView = view;
     }

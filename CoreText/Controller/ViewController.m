@@ -30,7 +30,7 @@
     NSLog(@"%@",[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]);
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
-    self.arrayData = [self coreTextPaging:str textFrame:CGRectMake(0, 0, 300, 300)];
+    self.arrayData = [self coreTextPaging:str textFrame:CGRectMake(0, 0, self.view.frame.size.width-20, self.view.frame.size.height/2.7)];
     
     self.pagrIndex = 0;
     
