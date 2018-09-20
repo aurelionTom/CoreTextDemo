@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "ReaderViewController.h"
+#import "CTFrameParserConfig.h"
+#import "CTFrameParser.h"
 
 @interface ViewController ()<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
@@ -36,26 +38,34 @@
     [super viewDidLoad];
     
     
-    NSString *chapter_num = [NSString stringWithFormat:@"Chapter1"];
+    NSString *chapter_num = [NSString stringWithFormat:@"1、庙会"];
     NSString *path1 = [[NSBundle mainBundle] pathForResource:chapter_num ofType:@"txt"];
     NSLog(@"%@",[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]);
     
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
-    self.arrayData = [self coreTextPaging:str textFrame:CGRectMake(0, 0, self.view.frame.size.width-20, self.view.frame.size.height/2.7)];
+//    NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
+    NSString *strS = [[NSString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
+    self.arrayData = [self coreTextPaging:strS textFrame:CGRectMake(20, 0, self.view.frame.size.width-40, self.view.frame.size.height-84)];
     
     _isPage = 0;
     
     _pagrIndex = 0;
     
-    [self initPageView:NO];
+    [self initPageView];
     
 }
 
 //CoreText 分页
-- (NSArray *)coreTextPaging:(NSAttributedString *)str textFrame:(CGRect)textFrame{
+- (NSArray *)coreTextPaging:(NSString *)str textFrame:(CGRect)textFrame{
     NSMutableArray *pagingResult = [NSMutableArray array];
-    CFAttributedStringRef cfAttStr = (__bridge CFAttributedStringRef)str;
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(cfAttStr);
+//    CFAttributedStringRef cfAttStr = (__bridge CFAttributedStringRef)str;
+    
+    CTFrameParserConfig *config = [[CTFrameParserConfig alloc] init];
+    config.fontSize = 13;
+    NSDictionary *attributes = [[NSDictionary alloc]initWithDictionary:[CTFrameParser attributesWithConfig:config]];
+    NSAttributedString *contentString = [[NSAttributedString alloc] initWithString:str attributes:attributes];
+//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)contentString);
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)contentString);
     CGPathRef path = CGPathCreateWithRect(textFrame, NULL);
     
     int textPos = 0;
@@ -68,7 +78,7 @@
         NSRange ra = NSMakeRange(frameRange.location, frameRange.length);
         
         //获取范围并转换为NSRange，然后以NSAttributedString形式保存
-        [pagingResult addObject:[str attributedSubstringFromRange:ra]];
+        [pagingResult addObject:[contentString attributedSubstringFromRange:ra]];
         
         //移动当前文本位置
         textPos += frameRange.length;
@@ -81,7 +91,7 @@
 }
 
 
-- (void)initPageView:(BOOL)isFromMenu;
+- (void)initPageView
 {
     if (self.pageViewController) {              //初始化pageViewController
         [self.pageViewController removeFromParentViewController];
@@ -109,11 +119,12 @@
     }];
 }
 
+//返回一个CoreText阅读视图
 - (ReaderViewController *)readerControllerWithPage:(NSUInteger)page
 {
     ReaderViewController *textController = [[ReaderViewController alloc] init];
-    textController.strData = _arrayData[page];
-    textController.view.backgroundColor = [UIColor whiteColor];
+    textController.strData = _arrayData[page];              //读取数据
+    textController.view.backgroundColor = [UIColor whiteColor];             //必须设置
     [textController view];
     return textController;
 }
@@ -122,13 +133,13 @@
 //翻上一页
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSLog(@"翻到了上一页");
 //    ReaderViewController *reader = (ReaderViewController *)viewController;
     
     if (_pagrIndex == 0 || _pagrIndex < 0 ) {
         _pagrIndex = 0;
         return nil;
     }
+    NSLog(@"翻到了上一页");
     self.pagrIndex--;
     _isPage = 1;
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
@@ -138,12 +149,12 @@
 //翻下一页
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSLog(@"翻到了下一页");
     _pagrIndex ++;
     if (_pagrIndex > self.arrayData.count || _pagrIndex == self.arrayData.count) {
         _pagrIndex = (int)self.arrayData.count -1;
         return nil;
     }
+    NSLog(@"翻到了下一页");
     _isPage = 2;
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
     return textController;
@@ -153,7 +164,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if (completed) {
-        NSLog(@"翻页完成");
+//        NSLog(@"翻页完成");
     }else{
         NSLog(@"翻页未完成 又回来了。");
         if (_isPage == 1) {         //上一页

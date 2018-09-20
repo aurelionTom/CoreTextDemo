@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CoreTextData *)parseContent:(NSString *)content config:(CTFrameParserConfig*)config;
 
++ (NSDictionary *)attributesWithConfig:(CTFrameParserConfig *)config;
+
 @end
 
 NS_ASSUME_NONNULL_END

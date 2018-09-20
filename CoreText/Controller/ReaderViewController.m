@@ -27,6 +27,7 @@
     CTFrameParserConfig *config = [[CTFrameParserConfig alloc] init];
     config.textColor = [UIColor blackColor];
     config.width = self.ctView.width;
+    config.fontSize = 13;
     NSString *str = [NSString stringWithFormat:@"%@",self.strData.string];
     CoreTextData *data = [CTFrameParser parseContent:str config:config];
     self.ctView.data = data;
@@ -37,7 +38,7 @@
 -(CTDisplayView *)ctView{
     if (!_ctView) {
         CTDisplayView *view = [[CTDisplayView alloc]init];
-        view.frame = CGRectMake(10, 64, self.view.frame.size.width-20, self.view.frame.size.height);
+        view.frame = CGRectMake(20, 44, self.view.frame.size.width-40, self.view.frame.size.height-84);
         [self.view addSubview:view];
         _ctView = view;
     }

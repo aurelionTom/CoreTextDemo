@@ -32,9 +32,7 @@
 }
 + (CoreTextData *)parseContent:(NSString *)content config:(CTFrameParserConfig*)config {
     NSDictionary *attributes = [self attributesWithConfig:config];
-    NSAttributedString *contentString =
-    [[NSAttributedString alloc] initWithString:content
-                                    attributes:attributes];
+    NSAttributedString *contentString = [[NSAttributedString alloc] initWithString:content attributes:attributes];
     // 创建 CTFramesetterRef 实例
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)contentString);
     // 获得要绘制的区域的高度
@@ -52,9 +50,7 @@
     CFRelease(framesetter);
     return data;
 }
-+ (CTFrameRef)createFrameWithFramesetter:(CTFramesetterRef)framesetter
-                                  config:(CTFrameParserConfig *)config
-                                  height:(CGFloat)height {
++ (CTFrameRef)createFrameWithFramesetter:(CTFramesetterRef)framesetter config:(CTFrameParserConfig *)config height:(CGFloat)height {
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, NULL, CGRectMake(0, 0, config.width, height));
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
