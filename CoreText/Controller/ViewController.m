@@ -13,9 +13,20 @@
 
 @property(nonatomic,strong)UIPageViewController * pageViewController;
 
+/**
+ 翻页的页码
+ */
 @property(assign,nonatomic)int pagrIndex;
 
+/**
+ 书籍数据
+ */
 @property(strong,nonatomic)NSArray *arrayData;
+
+/**
+ 翻页是否成功     1:上一页  2:下一页
+ */
+@property(assign,nonatomic)int isPage;
 
 @end
 
@@ -32,7 +43,9 @@
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithContentsOfFile:path1 encoding:4 error:NULL]];
     self.arrayData = [self coreTextPaging:str textFrame:CGRectMake(0, 0, self.view.frame.size.width-20, self.view.frame.size.height/2.7)];
     
-    self.pagrIndex = 0;
+    _isPage = 0;
+    
+    _pagrIndex = 0;
     
     [self initPageView:NO];
     
@@ -70,20 +83,20 @@
 
 - (void)initPageView:(BOOL)isFromMenu;
 {
-    if (_pageViewController) {              //初始化pageViewController
-        [_pageViewController removeFromParentViewController];
-        _pageViewController = nil;
+    if (self.pageViewController) {              //初始化pageViewController
+        [self.pageViewController removeFromParentViewController];
+        self.pageViewController = nil;
     }
-    _pageViewController = [[UIPageViewController alloc] init];
+    self.pageViewController = [[UIPageViewController alloc] init];
 //    NSDictionary *option = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:0] forKey:UIPageViewControllerOptionSpineLocationKey];
 //    _pageViewController = [[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:option];
 
-    _pageViewController.delegate = self;
-    _pageViewController.dataSource = self;
+    self.pageViewController.delegate = self;
+    self.pageViewController.dataSource = self;
     
     
-    [self addChildViewController:_pageViewController];
-    [self.view addSubview:_pageViewController.view];
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
     
     [self showPage:self.pagrIndex ];
 }
@@ -99,7 +112,7 @@
 - (ReaderViewController *)readerControllerWithPage:(NSUInteger)page
 {
     ReaderViewController *textController = [[ReaderViewController alloc] init];
-    textController.strData = self.arrayData[page];
+    textController.strData = _arrayData[page];
     textController.view.backgroundColor = [UIColor whiteColor];
     [textController view];
     return textController;
@@ -112,11 +125,12 @@
     NSLog(@"翻到了上一页");
 //    ReaderViewController *reader = (ReaderViewController *)viewController;
     
-    if (self.pagrIndex == 0 || self.pagrIndex < 0 ) {
-        self.pagrIndex = 0;
+    if (_pagrIndex == 0 || _pagrIndex < 0 ) {
+        _pagrIndex = 0;
         return nil;
     }
     self.pagrIndex--;
+    _isPage = 1;
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
     return textController;
 }
@@ -125,11 +139,12 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSLog(@"翻到了下一页");
-    self.pagrIndex ++;
-    if (self.pagrIndex > self.arrayData.count || self.pagrIndex == self.arrayData.count) {
-        self.pagrIndex = (int)self.arrayData.count -1;
+    _pagrIndex ++;
+    if (_pagrIndex > self.arrayData.count || _pagrIndex == self.arrayData.count) {
+        _pagrIndex = (int)self.arrayData.count -1;
         return nil;
     }
+    _isPage = 2;
     ReaderViewController *textController = [self readerControllerWithPage:self.pagrIndex];
     return textController;
 }
@@ -141,6 +156,11 @@
         NSLog(@"翻页完成");
     }else{
         NSLog(@"翻页未完成 又回来了。");
+        if (_isPage == 1) {         //上一页
+            self.pagrIndex ++;
+        }else if(_isPage == 2) {        //下一页
+            self.pagrIndex --;
+        }
     }
 }
 

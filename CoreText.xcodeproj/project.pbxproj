@@ -514,14 +514,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 33ZJ64DPUU;
+				DEVELOPMENT_TEAM = KK699H92EX;
 				GCC_PREFIX_HEADER = "CoreText/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CoreText.aurelionSol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tom.CoreText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -532,14 +532,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 33ZJ64DPUU;
+				DEVELOPMENT_TEAM = KK699H92EX;
 				GCC_PREFIX_HEADER = "CoreText/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CoreText.aurelionSol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tom.CoreText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
